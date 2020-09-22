@@ -19,6 +19,6 @@ public class CSVFile {
     @Column(name = "upload_date_time", nullable = false)
     private LocalDateTime uploadDateTime;
 
-    @Column(name = "device_type", nullable = false)
-    private String devType;
+    @ManyToOne(targetEntity = DeviceType.class, fetch = FetchType.EAGER)
+    private DeviceType devType;
 }
