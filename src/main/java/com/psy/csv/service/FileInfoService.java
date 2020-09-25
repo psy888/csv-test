@@ -7,6 +7,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
+
+import static java.util.Objects.isNull;
 
 @Service
 @Value
@@ -20,6 +27,27 @@ public class FileInfoService {
 
     public Page<CSVFile> searchFileByName(String searchRequest, int pageNumber, int pageResultLimit, String sortBy, String sortOrder) {
         return fileInfoRepository.findByFileNameContains(searchRequest, PageRequest.of(pageNumber, pageResultLimit, getSorting(sortBy, sortOrder)));
+    }
+
+    public CSVFile addNewFile(MultipartFile f, String deviceType) throws Exception {
+        return fileInfoRepository.save(createEntityForFile(f, deviceType));
+    }
+
+    /**
+     * Create new  CSVFile entity instance for file
+     *
+     * @param f - multipart file
+     * @return CSVFile entity
+     */
+    private CSVFile createEntityForFile(MultipartFile f, String deviceType) throws Exception {
+        if (isNull(f)) throw new Exception("File is corrupted");
+        if (f.getSize() == 0) throw new Exception("File is empty");
+
+        CSVFile csvFile = new CSVFile();
+        csvFile.setFileName(f.getOriginalFilename());
+        csvFile.setDevType(deviceType);
+        csvFile.setUploadDateTime(Date.from(LocalDateTime.now().toInstant(ZoneOffset.ofHours(0)))); //todo get offset
+        return csvFile;
     }
 
     private Sort getSorting(String sortBy, String order) {
