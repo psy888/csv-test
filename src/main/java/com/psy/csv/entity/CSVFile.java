@@ -3,7 +3,7 @@ package com.psy.csv.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "file", schema = "my_schema")
@@ -17,8 +17,8 @@ public class CSVFile {
     private String fileName;
 
     @Column(name = "upload_date_time", nullable = false)
-    private LocalDateTime uploadDateTime;
+    private Date uploadDateTime;
 
-    @ManyToOne(targetEntity = DeviceType.class, fetch = FetchType.EAGER)
-    private DeviceType devType;
+    @Column(name = "device_type", nullable = false)
+    private String devType;
 }
