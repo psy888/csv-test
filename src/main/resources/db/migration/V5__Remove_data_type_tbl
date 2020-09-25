@@ -1,0 +1,5 @@
+ALTER TABLE my_schema.file
+    DROP CONSTRAINT dev_type;
+ALTER TABLE my_schema.file
+    ALTER COLUMN device_type TYPE character varying(25) USING (device_type::text);
+DROP TABLE my_schema.device_type;
