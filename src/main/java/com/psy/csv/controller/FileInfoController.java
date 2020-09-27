@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200/files/")
 @Value
 public class FileInfoController {
 
@@ -18,12 +18,13 @@ public class FileInfoController {
     FileInfoService fileInfoService;
 
 
-    @GetMapping("/list")
+    @GetMapping("/files")
     public Page<CSVFile> getPagedSortedList(
-            @RequestParam(name = "page", required = false, defaultValue = "1") Integer pageNumber,
-            @RequestParam(name = "sortBy", required = false, defaultValue = "file_name") String sortBy,
-            @RequestParam(name = "sortOrder", required = false, defaultValue = "asc") String sortOrder) {
+            @RequestParam(name = "page", required = false, defaultValue = "0") Integer pageNumber,
+            @RequestParam(name = "sortBy", required = false, defaultValue = "uploadDateTime") String sortBy,
+            @RequestParam(name = "sortOrder", required = false, defaultValue = "desc") String sortOrder) {
         return fileInfoService.getFilesAllList(pageNumber, ROWS_PER_PAGE, sortBy, sortOrder);
+
     }
 
     @GetMapping("/search")
