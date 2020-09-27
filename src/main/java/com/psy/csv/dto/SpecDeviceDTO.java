@@ -10,6 +10,8 @@ import java.util.Date;
 
 @Data
 public class SpecDeviceDTO implements CsvBean {
+    @CsvIgnore
+    private Long id;
     @CsvBindByPosition(required = true, position = 0)
     private String name;
     @CsvBindByPosition(position = 2)

@@ -8,6 +8,8 @@ import lombok.Data;
 
 @Data
 public class NetDeviceDTO implements CsvBean {
+    @CsvIgnore
+    private Long id;
     @CsvBindByPosition(required = true, position = 0)
     private String name;
     @CsvBindByPosition(position = 3)
