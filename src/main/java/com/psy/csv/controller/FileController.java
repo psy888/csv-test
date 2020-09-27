@@ -1,26 +1,15 @@
 package com.psy.csv.controller;
 
-import com.psy.csv.repository.FileInfoRepository;
-import com.psy.csv.repository.NetDeviceRepository;
-import com.psy.csv.repository.SpecDeviceRepository;
-import com.psy.csv.service.DTOMapperService;
 import com.psy.csv.service.FileUploadService;
-import com.psy.csv.service.ParserService;
 import lombok.NonNull;
 import lombok.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200/")
 @Value
 public class FileController {
-
-    ParserService parserService;
-    DTOMapperService mapperService;
-    FileInfoRepository fileInfoRepository;
-    NetDeviceRepository netDeviceRepository;
-    SpecDeviceRepository specDeviceRepository;
 
     FileUploadService fileUploadService;
 
