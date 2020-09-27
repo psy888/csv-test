@@ -29,8 +29,8 @@ export class FileUploadFormComponent implements OnInit {
       // this.fileUploadService.postFile(this.fileToUpload,this.customDivider,String(this.withHeaders),this.selectedDeviceType).subscribe(result => {
 
 
-      console.warn('sent data', value);
-      console.warn('received result', result);
+      // console.warn('sent data', value);
+      // console.warn('received result', result);
       // do something, if upload success
       this.uploadForm.reset();
       // this.gotoFilesList()
@@ -48,7 +48,7 @@ export class FileUploadFormComponent implements OnInit {
   ngOnInit(): void {
     this.deviceTypes = ['network', 'special'];
     this.uploadForm = new FormGroup({
-      selectedType: new FormControl(this.deviceTypes[1], [Validators.required]),
+      selectedType: new FormControl(this.deviceTypes[0], [Validators.required]),
       file: new FormControl(null, [Validators.required])
     });
     this.uploadForm.valueChanges.subscribe(value => console.log(value));
