@@ -3,7 +3,7 @@ package com.psy.csv.service;
 import com.psy.csv.dto.CsvBean;
 import com.psy.csv.entity.CSVFile;
 import com.psy.csv.entity.SpecDevice;
-import com.psy.csv.repository.SpecDeviceRepository;
+import com.psy.csv.repository.SpecDevicePagedSortedRepository;
 import com.psy.csv.util.PageAndSortUtil;
 import lombok.Value;
 import org.springframework.data.domain.Page;
@@ -16,7 +16,7 @@ import java.util.List;
 @Value
 public class SpecDeviceService implements DeviceService {
 
-    SpecDeviceRepository repository;
+    SpecDevicePagedSortedRepository repository;
     DTOMapperService dtoMapperService;
 
     /**

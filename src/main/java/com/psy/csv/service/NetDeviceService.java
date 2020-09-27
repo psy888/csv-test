@@ -3,7 +3,7 @@ package com.psy.csv.service;
 import com.psy.csv.dto.CsvBean;
 import com.psy.csv.entity.CSVFile;
 import com.psy.csv.entity.NetDevice;
-import com.psy.csv.repository.FileInfoRepository;
+import com.psy.csv.repository.FileInfoPagedSortedRepository;
 import com.psy.csv.repository.NetDevicePagedSortedRepository;
 import com.psy.csv.util.PageAndSortUtil;
 import lombok.Value;
@@ -20,7 +20,7 @@ import static java.util.Objects.nonNull;
 public class NetDeviceService implements DeviceService {
 
     NetDevicePagedSortedRepository repository;
-    FileInfoRepository fileRepository;
+    FileInfoPagedSortedRepository fileRepository;
     DTOMapperService dtoMapperService;
 
     /**
