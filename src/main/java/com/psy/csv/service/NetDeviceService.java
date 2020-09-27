@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static java.util.Objects.nonNull;
+
 @Service
 @Value
 public class NetDeviceService implements DeviceService {
@@ -65,7 +67,10 @@ public class NetDeviceService implements DeviceService {
     @Override
     public void updateDevice(CsvBean device) {
         NetDevice entity = dtoMapperService.getMapper().map(device, NetDevice.class);
-        repository.save(entity);
+        if (nonNull(entity)) {
+            repository.save(entity);
+        }
+
     }
 
 
