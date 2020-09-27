@@ -3,6 +3,7 @@ package com.psy.csv.repository;
 import com.psy.csv.entity.CSVFile;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,11 +15,8 @@ import org.springframework.stereotype.Repository;
  * PageRequest.of(0, 20, Sort.by("column_name1"));
  */
 @Repository
-public interface FileInfoRepository extends PagingAndSortingRepository<CSVFile, Long> {
-
-    Page<CSVFile> findAll(Pageable pageable); //list of all files with pager usage : PageRequest.of(int pageIndex, int cntPerPage)
+public interface FileInfoPagedSortedRepository extends PagingAndSortingRepository<CSVFile, Long>, CrudRepository<CSVFile, Long> {
 
     Page<CSVFile> findByFileNameContains(String name, Pageable pageable); //find by name with pager
-
 
 }
