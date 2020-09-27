@@ -2,12 +2,4 @@ tr > td {
   vertical-align: middle !important;
 }
 
-span {
-  padding: 1rem 1rem;
-}
 
-input {
-  border: none !important;
-  border-color: transparent !important;
-  width: auto;
-}

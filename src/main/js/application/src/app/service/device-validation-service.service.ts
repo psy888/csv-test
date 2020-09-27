@@ -18,7 +18,12 @@ export class DeviceValidationServiceService {
     if (StateList.lastIndexOf(control.value.toString()) != -1) {
       return null;
     }
-    return {"wrong state typed": true}
+    return {"select": true}
   }
 
+  ipAddressCheck(control: FormControl): { [s: string]: boolean } {
+    const ipRegExp = new RegExp('^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$');
+    if (ipRegExp.test(control.value.toString())) return null;
+    return {"ipCheck": true};
+  }
 }

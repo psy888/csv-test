@@ -1,100 +1,139 @@
+<!-- Editable table -->
 <div class="card">
   <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Список устройств</h3>
   <div class="card-body">
-    <div id="table">
-      <table class="table table-bordered table-responsive-md table-striped text-center">
+    <div class="table-editable" id="table">
+      <table class="table table-bordered table-responsive-md table-striped">
         <tr>
+          <th class="text-center" scope="col">#</th>
           <th class="text-center" scope="col">Название устройства</th>
           <th class="text-center" scope="col">Адрес устройства</th>
           <th class="text-center" scope="col">Состояние</th>
           <th class="text-center" scope="col">IP адрес</th>
-          <th class="text-center" scope="col">ЦП %</th>
+          <th class="text-center" scope="col">% загрузка цп</th>
           <th class="text-center" scope="col">Включено</th>
+          <th class="text-center" scope="col">Действие</th>
         </tr>
-
-        <!--            <tr *ngFor="let device of deviceFormGroup.controls.devices.controls; let i = index;">-->
-        <tr *ngFor="let device of deviceFormGroup.get('devices')['controls']; let i = index;">
-          <td [formGroup]="device">
-
-            <input [formControl]="device.controls.name" [value]="device.controls.name">
-
+        <tr *ngFor="let device of deviceList; let i = index;">
+          <th scope="row">{{i + 1}}</th>
+          <td>
+            {{device.name}}
           </td>
-          <td [formGroup]="device">
-            <input [formControl]="device.controls.address" [value]="device.controls.address">
+          <td>
+            {{device.address}}
           </td>
-          <td [formGroup]="device">
-            <input [formControl]="device.controls.curState" [value]="device.controls.curState">
+          <td>
+            {{device.curState}}
           </td>
-          <td [formGroup]="device">
-            <input [formControl]="device.controls.ipAddress" [value]="device.controls.ipAddress">
+          <td>
+            {{device.ipAddress}}
           </td>
-          <td [formGroup]="device">
-            <input [formControl]="device.controls.procLoad" [value]="device.controls.procLoad">
+          <td>
+            {{device.procLoad}}
           </td>
-          <td [formGroup]="device">
-            <input [formControl]="device.controls.isOn" [value]="device.controls.isOn">
+          <td>
+            {{device.isOn}}
+          </td>
+          <td>
+            <button (click)="edit(device)" class="btn btn-sm btn-outline-primary text-center" type="button">
+              Редактировать
+            </button>
           </td>
         </tr>
-
-        <!--          Chosen name: {{ deviceFormGroup.controls.devices.controls[i].controls.name.value }}-->
-
       </table>
     </div>
   </div>
+  <ng-container *ngIf="editForm" class="container">
+    <h2 class="py-4">Редактировать устройство</h2>
+    <form (ngSubmit)="save(editForm.value)" [formGroup]="editForm">
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="name">Название устройства</label>
+        <div class="col-sm-6">
+          <input class="form-control" formControlName="name" id="name" type="text">
+          <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)"
+               class="alert alert-danger">
+
+            <div *ngIf="editForm.get('name').errors.required">
+              Обязательное поле
+            </div>
+            <div *ngIf="editForm.get('name').errors.maxlength">
+              Макс длинна 20 символов
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="address">Адрес устройства</label>
+        <div class="col-sm-6">
+          <input class="form-control" formControlName="address" id="address" type="text">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="curState">Состояние</label>
+        <div class="col-sm-6">
+          <input class="form-control" formControlName="curState" id="curState" type="text">
+          <div
+            *ngIf="editForm.get('curState').invalid && (editForm.get('curState').dirty || editForm.get('curState').touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="editForm.get('curState').errors.required">
+              Обязательное поле
+            </div>
+            <div *ngIf="editForm.get('curState').errors.select">
+              варианты: РАБОЧИЙ, В РЕМОНТЕ, НА УТИЛИЗАЦИИ
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="ipAddress">IP адрес</label>
+        <div class="col-sm-6">
+          <input class="form-control" formControlName="ipAddress" id="ipAddress" type="text">
+          <div
+            *ngIf="editForm.get('ipAddress').invalid && (editForm.get('ipAddress').dirty || editForm.get('ipAddress').touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="editForm.get('ipAddress').errors.required">
+              Обязательное поле
+            </div>
+            <div *ngIf="editForm.get('ipAddress').errors.ipCheck">
+              Не верный формат IP адреса
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="procLoad">% загрузка цп</label>
+        <div class="col-sm-6">
+          <input class="form-control" formControlName="procLoad" id="procLoad" type="text">
+          <div
+            *ngIf="editForm.get('procLoad').invalid && (editForm.get('procLoad').dirty || editForm.get('procLoad').touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="editForm.get('procLoad').errors.max">
+              Макс значение 100.00
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="isOn">Включено</label>
+        <div class="col-sm-6">
+          <input class="form-control" formControlName="isOn" id="isOn" type="checkbox">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-4 offset-sm-2">
+          <button [disabled]="!editForm.valid" class="btn btn-primary mr-2" type="submit">Сохранить</button>
+          <button (click)="cancel()" class="btn btn-outline-primary" type="reset">Отмена</button>
+        </div>
+      </div>
+    </form>
+  </ng-container>
 </div>
-
 <!-- Editable table -->
-<!--<div class="card">-->
-<!--  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Список устройств</h3>-->
-<!--  <div class="card-body">-->
-<!--    <div id="table" class="table-editable">-->
-<!--      <table class="table table-bordered table-responsive-md table-striped text-center">-->
-<!--        <tr>-->
-<!--          <th class="text-center">Название устройства</th>-->
-<!--          <th class="text-center">Адрес устройства</th>-->
-<!--          <th class="text-center">Состояние</th>-->
-<!--          <th class="text-center">IP адрес</th>-->
-<!--          <th class="text-center">% загрузка процессора</th>-->
-<!--          <th class="text-center">Включено</th>-->
-<!--        </tr>-->
-<!--        <tr *ngFor="let device of deviceList">-->
-<!--          <td>-->
-<!--            <span contenteditable="true" (keyup)="changeValue(device.id, 'name', $event)"-->
-<!--                  (blur)="updateList(device.id, 'name', $event)">{{device.name}}</span>-->
-<!--          </td>-->
-<!--          <td>-->
-<!--            <span contenteditable="true" (keyup)="changeValue(device.id, 'age', $event)"-->
-<!--                  (blur)="updateList(device.id, 'age', $event)">{{device.address}}</span>-->
-<!--          </td>-->
-<!--          <td>-->
-<!--            <span contenteditable="true" (keyup)="changeValue(device.id, 'companyName', $event)"-->
-<!--                  (blur)="updateList(device.id, 'companyName', $event)">{{device.curState}}</span>-->
-<!--          </td>-->
-<!--          <td>-->
-<!--            <span contenteditable="true" (keyup)="changeValue(device.id, 'country', $event)"-->
-<!--                  (blur)="updateList(device.id, 'country', $event)">{{device.ipAddress}}</span>-->
-<!--          </td>-->
-<!--          <td>-->
-<!--            <span contenteditable="true" (keyup)="changeValue(device.id, 'city', $event)"-->
-<!--                  (blur)="updateList(device.id, 'city', $event)">{{device.procLoad}}</span>-->
-<!--          </td>-->
-<!--          <td>-->
-<!--            <span contenteditable="true" (keyup)="changeValue(device.id, 'city', $event)"-->
-<!--                  (blur)="updateList(device.id, 'city', $event)">{{device.isOn}}</span>-->
-<!--          </td>-->
-<!--          <td>-->
-<!--            <span class="table-remove">-->
-<!--              <button type="button" class="btn btn-danger text-center" (click)="remove(device.id)">Удалить</button>-->
-<!--              <button type="button" class="btn btn-success text-center" (click)="save(device.id)">Сохранить</button>-->
-<!--            </span>-->
-<!--          </td>-->
-<!--        </tr>-->
-<!--      </table>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<!-- Editable table -->
-
 
 
 
