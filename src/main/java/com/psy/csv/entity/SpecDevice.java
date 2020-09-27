@@ -3,7 +3,7 @@ package com.psy.csv.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Table(name = "spec_dev", schema = "my_schema")
@@ -20,8 +20,8 @@ public class SpecDevice implements Device {
     private String curState;
     @ManyToOne(targetEntity = CSVFile.class, fetch = FetchType.LAZY)
     private CSVFile file;
-    @Column(name = "prod_date", nullable = false)
-    private LocalDateTime localDateTime;
+    @Column(name = "prod_date")
+    private Date productionDate;
 
 
 }
