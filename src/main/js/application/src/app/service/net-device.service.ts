@@ -18,22 +18,10 @@ export class NetDeviceService {
         fileId: fileId
       }
     });
-    // return this.http.get(this.baseUrl, {
-    //   params: {
-    //     fileId: fileId,
-    //     page: page.toString(),
-    //     sortBy: sortByField,
-    //     sortOrder: sortOrder
-    //   }
-    // });
   }
 
   public updateDevice(device: NetDevice) {
-    return this.http.post(this.baseUrl, {
-      params: {
-        device: device
-      }
-    })
+    return this.http.post<NetDevice>(this.baseUrl, device);
   }
 
 }
