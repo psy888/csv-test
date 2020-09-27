@@ -1,0 +1,26 @@
+<div class="card my-5">
+  <div class="card-body">
+    <div [formGroup]="searchForm" class="form-group">
+      <input (change)="search()" class="form-control col-md-3" formControlName="searchField" id="search"
+             id="file"
+             placeholder="Поиск файла по имени"
+             type="text">
+    </div>
+    <table class="table table-hover">
+      <thead class="thead-dark">
+      <tr>
+        <th (click)="onThClick('fileName')" class="header-cell" scope="col">Имя файла</th>
+        <th (click)="onThClick('devType')" class="header-cell" scope="col">Тип устройств</th>
+        <th (click)="onThClick('uploadDateTime')" class="header-cell" scope="col">Загружен</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr (click)="goToDetails(file.id.toString())" *ngFor="let file of files">
+        <td>{{ file.fileName }}</td>
+        <td>{{ file.devType }}</td>
+        <td>{{ file.uploadDateTime | date:'short'}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

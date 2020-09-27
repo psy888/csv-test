@@ -1,0 +1,100 @@
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Список устройств</h3>
+  <div class="card-body">
+    <div id="table">
+      <table class="table table-bordered table-responsive-md table-striped text-center">
+        <tr>
+          <th class="text-center" scope="col">Название устройства</th>
+          <th class="text-center" scope="col">Адрес устройства</th>
+          <th class="text-center" scope="col">Состояние</th>
+          <th class="text-center" scope="col">IP адрес</th>
+          <th class="text-center" scope="col">ЦП %</th>
+          <th class="text-center" scope="col">Включено</th>
+        </tr>
+
+        <!--            <tr *ngFor="let device of deviceFormGroup.controls.devices.controls; let i = index;">-->
+        <tr *ngFor="let device of deviceFormGroup.get('devices')['controls']; let i = index;">
+          <td [formGroup]="device">
+
+            <input [formControl]="device.controls.name" [value]="device.controls.name">
+
+          </td>
+          <td [formGroup]="device">
+            <input [formControl]="device.controls.address" [value]="device.controls.address">
+          </td>
+          <td [formGroup]="device">
+            <input [formControl]="device.controls.curState" [value]="device.controls.curState">
+          </td>
+          <td [formGroup]="device">
+            <input [formControl]="device.controls.ipAddress" [value]="device.controls.ipAddress">
+          </td>
+          <td [formGroup]="device">
+            <input [formControl]="device.controls.procLoad" [value]="device.controls.procLoad">
+          </td>
+          <td [formGroup]="device">
+            <input [formControl]="device.controls.isOn" [value]="device.controls.isOn">
+          </td>
+        </tr>
+
+        <!--          Chosen name: {{ deviceFormGroup.controls.devices.controls[i].controls.name.value }}-->
+
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Editable table -->
+<!--<div class="card">-->
+<!--  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Список устройств</h3>-->
+<!--  <div class="card-body">-->
+<!--    <div id="table" class="table-editable">-->
+<!--      <table class="table table-bordered table-responsive-md table-striped text-center">-->
+<!--        <tr>-->
+<!--          <th class="text-center">Название устройства</th>-->
+<!--          <th class="text-center">Адрес устройства</th>-->
+<!--          <th class="text-center">Состояние</th>-->
+<!--          <th class="text-center">IP адрес</th>-->
+<!--          <th class="text-center">% загрузка процессора</th>-->
+<!--          <th class="text-center">Включено</th>-->
+<!--        </tr>-->
+<!--        <tr *ngFor="let device of deviceList">-->
+<!--          <td>-->
+<!--            <span contenteditable="true" (keyup)="changeValue(device.id, 'name', $event)"-->
+<!--                  (blur)="updateList(device.id, 'name', $event)">{{device.name}}</span>-->
+<!--          </td>-->
+<!--          <td>-->
+<!--            <span contenteditable="true" (keyup)="changeValue(device.id, 'age', $event)"-->
+<!--                  (blur)="updateList(device.id, 'age', $event)">{{device.address}}</span>-->
+<!--          </td>-->
+<!--          <td>-->
+<!--            <span contenteditable="true" (keyup)="changeValue(device.id, 'companyName', $event)"-->
+<!--                  (blur)="updateList(device.id, 'companyName', $event)">{{device.curState}}</span>-->
+<!--          </td>-->
+<!--          <td>-->
+<!--            <span contenteditable="true" (keyup)="changeValue(device.id, 'country', $event)"-->
+<!--                  (blur)="updateList(device.id, 'country', $event)">{{device.ipAddress}}</span>-->
+<!--          </td>-->
+<!--          <td>-->
+<!--            <span contenteditable="true" (keyup)="changeValue(device.id, 'city', $event)"-->
+<!--                  (blur)="updateList(device.id, 'city', $event)">{{device.procLoad}}</span>-->
+<!--          </td>-->
+<!--          <td>-->
+<!--            <span contenteditable="true" (keyup)="changeValue(device.id, 'city', $event)"-->
+<!--                  (blur)="updateList(device.id, 'city', $event)">{{device.isOn}}</span>-->
+<!--          </td>-->
+<!--          <td>-->
+<!--            <span class="table-remove">-->
+<!--              <button type="button" class="btn btn-danger text-center" (click)="remove(device.id)">Удалить</button>-->
+<!--              <button type="button" class="btn btn-success text-center" (click)="save(device.id)">Сохранить</button>-->
+<!--            </span>-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--      </table>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!-- Editable table -->
+
+
+
+
