@@ -1,1 +1,106 @@
-<p>spec-device-list works!</p>
+<div class="card">
+  <h3 class="card-header text-center font-weight-bold text-uppercase py-4">Данные о специализированном оборудовании</h3>
+  <div class="card-body">
+    <div class="table-editable" id="table">
+      <table class="table table-bordered table-responsive-md table-striped">
+        <tr>
+          <th class="text-center" scope="col">#</th>
+          <th class="text-center" scope="col">Название устройства</th>
+          <th class="text-center" scope="col">Адрес устройства</th>
+          <th class="text-center" scope="col">Состояние</th>
+          <th class="text-center" scope="col">Дата производства</th>
+          <th class="text-center" scope="col">Действие</th>
+        </tr>
+        <tr *ngFor="let device of deviceList; let i = index;">
+          <th scope="row">{{i + 1}}</th>
+          <td>
+            {{device.name}}
+          </td>
+          <td>
+            {{device.address}}
+          </td>
+          <td>
+            {{device.curState}}
+          </td>
+          <td>
+            {{device.productionDate | date:'yyyy-MM-dd'}}
+          </td>
+          <td>
+            <button (click)="edit(device)" class="btn btn-sm btn-outline-primary text-center" type="button">
+              Редактировать
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <ng-container *ngIf="editForm" class="container">
+    <h2 class="py-4">Редактировать устройство</h2>
+    <form (ngSubmit)="save(editForm.value)" [formGroup]="editForm">
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="name">Название устройства</label>
+        <div class="col-sm-6">
+          <input class="form-control" formControlName="name" id="name" type="text">
+          <div *ngIf="editForm.get('name').invalid && (editForm.get('name').dirty || editForm.get('name').touched)"
+               class="alert alert-danger">
+
+            <div *ngIf="editForm.get('name').errors.required">
+              Обязательное поле
+            </div>
+            <div *ngIf="editForm.get('name').errors.maxlength">
+              Макс длинна 20 символов
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="address">Адрес устройства</label>
+        <div class="col-sm-6">
+          <input class="form-control" formControlName="address" id="address" type="text">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="curState">Состояние</label>
+        <div class="col-sm-6">
+          <input class="form-control" formControlName="curState" id="curState" type="text">
+          <div
+            *ngIf="editForm.get('curState').invalid && (editForm.get('curState').dirty || editForm.get('curState').touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="editForm.get('curState').errors.required">
+              Обязательное поле
+            </div>
+            <div *ngIf="editForm.get('curState').errors.select">
+              варианты: РАБОЧИЙ, В РЕМОНТЕ, НА УТИЛИЗАЦИИ
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="productionDate">Дата производства</label>
+        <div class="col-sm-6">
+          <input class="form-control" formControlName="productionDate" id="productionDate" type="text">
+          <div
+            *ngIf="editForm.get('productionDate').invalid && (editForm.get('productionDate').dirty || editForm.get('productionDate').touched)"
+            class="alert alert-danger">
+
+            <div *ngIf="editForm.get('productionDate').errors.max">
+              Макс значение 100.00
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-4 offset-sm-2">
+          <button [disabled]="!editForm.valid" class="btn btn-primary mr-2" type="submit">Сохранить</button>
+          <button (click)="cancel()" class="btn btn-outline-primary" type="reset">Отмена</button>
+        </div>
+      </div>
+    </form>
+  </ng-container>
+</div>
+
+
+

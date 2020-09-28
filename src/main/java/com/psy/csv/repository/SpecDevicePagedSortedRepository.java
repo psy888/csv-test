@@ -8,8 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
 public interface SpecDevicePagedSortedRepository extends PagingAndSortingRepository<SpecDevice, Long>, CrudRepository<SpecDevice, Long> {
 
@@ -17,6 +15,7 @@ public interface SpecDevicePagedSortedRepository extends PagingAndSortingReposit
     Page<SpecDevice> findAllByFileId(Long id, Pageable pageable);
 
     //find all devices by uploaded file
-    List<SpecDevice> findAllByFile(CSVFile file);
+    Page<SpecDevice> findAllByFile(CSVFile file, Pageable pageable);
+
 
 }

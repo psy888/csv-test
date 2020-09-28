@@ -6,5 +6,5 @@ export class SpecDevice {
   address: string;
   curState: string;
   file: Csvfile;
-  productionDate: string;
+  productionDate: number;
 }

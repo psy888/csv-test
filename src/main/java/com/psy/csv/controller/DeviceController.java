@@ -1,6 +1,7 @@
 package com.psy.csv.controller;
 
 import com.psy.csv.dto.NetDeviceDTO;
+import com.psy.csv.dto.SpecDeviceDTO;
 import com.psy.csv.entity.NetDevice;
 import com.psy.csv.entity.SpecDevice;
 import com.psy.csv.service.FileInfoService;
@@ -41,30 +42,30 @@ public class DeviceController {
 
     @PostMapping("/net-device")
     public void updateDevice(@RequestBody NetDeviceDTO device) {
-        log.info(device.toString());
+//        log.info(device.toString());
         netDeviceService.updateDevice(device);
     }
 
     @GetMapping("/spec-device")
     public Page<SpecDevice> getSpecDevicesByFile(
             @RequestParam(name = "fileId") Long id,
-            @RequestParam(name = "page", required = false) Integer p,
-            @RequestParam(name = "sortBy", required = false) String sortBy,
-            @RequestParam(name = "sortOrder", required = false) String sortOrder) {
+            @RequestParam(name = "page", required = false, defaultValue = "0") Integer p,
+            @RequestParam(name = "sortBy", required = false, defaultValue = "name") String sortBy,
+            @RequestParam(name = "sortOrder", required = false, defaultValue = "asc") String sortOrder) {
 
-        return specDeviceService.getAllDevicesListByFile(id, p, ROWS_PER_PAGE, sortBy, sortOrder);
+        try {
+            return specDeviceService.getAllDevicesListByFile(id, p, ROWS_PER_PAGE, sortBy, sortOrder);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-
-//    @PostMapping("/net-device")
-//    public void editDevice(@RequestBody Device device) {
+    @PostMapping("/spec-device")
+    public void updateDevice(@RequestBody SpecDeviceDTO device) {
 //        log.info(device.toString());
-//        String type = device.getFile().getDevType();
-//        if (isNetDevType(type)) {
-//            netDeviceService.updateDevice(device);
-//        } else if (isSpecDevType(type)) {
-//            specDeviceService.updateDevice(device);
-//        }
-//    }
+        specDeviceService.updateDevice(device);
+    }
+
 
 }
