@@ -77,9 +77,16 @@ export class FileListComponent implements OnInit {
     );
   }
 
-  goToDetails(fileId: string) {
-    console.log('file id' + fileId);
-    this.router.navigate(['netDevices'], {queryParams: {id: fileId}});
+  // goToDetails(fileId: string) {
+  goToDetails(file: Csvfile) {
+    // console.log('file id' + file.id);
+    if (file.devType == 'network') {
+      this.router.navigate(['netDevices'], {queryParams: {id: file.id}});
+    }
+    if (file.devType == 'special') {
+      this.router.navigate(['specDevices'], {queryParams: {id: file.id}});
+    }
+
   }
 
 

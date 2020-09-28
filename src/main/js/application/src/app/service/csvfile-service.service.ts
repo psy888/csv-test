@@ -1,8 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Csvfile} from "../model/csvfile";
-import {NetDeviceService} from "./net-device.service";
-import {SpecDeviceService} from "./spec-device.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +9,7 @@ export class CsvfileServiceService {
 
   private baseUrl: string;
 
-  constructor(private http: HttpClient,
-              netDeviceService: NetDeviceService,
-              specDeviceService: SpecDeviceService) {
+  constructor(private http: HttpClient) {
     this.baseUrl = 'http://localhost:8080';
   }
 
@@ -28,14 +24,7 @@ export class CsvfileServiceService {
     });
   }
 
-  public getFileDetails(file: Csvfile) {
 
-    return this.http.post(this.baseUrl + '/details', {
-      params: {
-        fileId: file.id
-      }
-    });
-  }
 
 }
 

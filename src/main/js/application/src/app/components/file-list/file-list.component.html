@@ -15,10 +15,10 @@
       </tr>
       </thead>
       <tbody>
-      <tr (click)="goToDetails(file.id.toString())" *ngFor="let file of files">
+      <tr (click)="goToDetails(file)" *ngFor="let file of files">
         <td>{{ file.fileName }}</td>
         <td>{{ file.devType }}</td>
-        <td>{{ file.uploadDateTime | date:'short'}}</td>
+        <td>{{ file.uploadDateTime | date:'yyyy-MM-dd HH:mm'}}</td>
       </tr>
       </tbody>
     </table>
