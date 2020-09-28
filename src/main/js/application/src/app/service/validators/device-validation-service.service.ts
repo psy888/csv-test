@@ -26,4 +26,9 @@ export class DeviceValidationServiceService {
     if (ipRegExp.test(control.value.toString())) return null;
     return {"ipCheck": true};
   }
+
+  dateValidation(control: FormControl): { [s: string]: boolean } {
+    let date = control.value;
+    return null;
+  }
 }

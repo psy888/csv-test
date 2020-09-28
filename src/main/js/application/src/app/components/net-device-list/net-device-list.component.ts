@@ -3,7 +3,7 @@ import {NetDeviceService} from "../../service/net-device.service";
 import {NetDevice} from "../../model/net-device";
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {DeviceValidationServiceService} from "../../service/device-validation-service.service";
+import {DeviceValidationServiceService} from "../../service/validators/device-validation-service.service";
 
 @Component({
   selector: 'app-net-device-list',
@@ -14,8 +14,6 @@ export class NetDeviceListComponent implements OnInit {
 
 
   editForm: FormGroup;
-
-  // devicesFormArray: FormArray = new FormArray([]);
 
   deviceList: NetDevice[];
   fileId: string;
@@ -63,14 +61,6 @@ export class NetDeviceListComponent implements OnInit {
 
 
   subscribeToChanges(formGroup: FormGroup) {
-    // formGroup.valueChanges.subscribe(value => {
-    //   for (let name in formGroup.controls) {
-    //     if (formGroup.controls[name].invalid) {
-    //       console.log('control ' + name + ' is invalid');
-    //     }
-    //   }
-    //   // console.log(value);
-    // });
     formGroup.get('name')
       .valueChanges
       .subscribe(value => {
@@ -119,8 +109,8 @@ export class NetDeviceListComponent implements OnInit {
   save(value: any) {
     // console.log('is valid :' + this.editForm.valid)
     this.netDeviceService.updateDevice(this.editableDevice).subscribe(value1 => {
-      console.log(value1);
-      console.log('saved id : ' + this.editableDevice.id);
+      // console.log(value1);
+      // console.log('saved id : ' + this.editableDevice.id);
       this.cancel();
       this.getDevicesData();
     });
@@ -132,7 +122,4 @@ export class NetDeviceListComponent implements OnInit {
     this.editableDevice = null;
   }
 
-  changeValue(id: number, property: string, event: any) {
-    console.log('id: ' + id + ' property : ' + property + ' event ' + event);
-  }
 }
