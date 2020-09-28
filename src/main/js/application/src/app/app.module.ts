@@ -1,6 +1,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
+import {ModalModule} from './modal';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FileListComponent} from './components/file-list/file-list.component';
@@ -13,6 +13,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxPaginationModule} from "ngx-pagination";
 import {NetDeviceListComponent} from './components/net-device-list/net-device-list.component';
 import {SpecDeviceListComponent} from './components/spec-device-list/spec-device-list.component';
+import {ReportRequestModalComponent} from './components/report-request-modal/report-request-modal.component';
 
 @NgModule({
   declarations: [
@@ -20,16 +21,18 @@ import {SpecDeviceListComponent} from './components/spec-device-list/spec-device
     FileListComponent,
     FileUploadFormComponent,
     NetDeviceListComponent,
-    SpecDeviceListComponent
+    SpecDeviceListComponent,
+    ReportRequestModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ModalModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [CsvfileServiceService, FileUploadService],
   bootstrap: [AppComponent]
