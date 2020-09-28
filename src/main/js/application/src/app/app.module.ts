@@ -13,7 +13,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NgxPaginationModule} from "ngx-pagination";
 import {NetDeviceListComponent} from './components/net-device-list/net-device-list.component';
 import {SpecDeviceListComponent} from './components/spec-device-list/spec-device-list.component';
-import {ReportRequestModalComponent} from './components/report-request-modal/report-request-modal.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,6 @@ import {ReportRequestModalComponent} from './components/report-request-modal/rep
     FileUploadFormComponent,
     NetDeviceListComponent,
     SpecDeviceListComponent,
-    ReportRequestModalComponent
   ],
   imports: [
     BrowserModule,
