@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {FileUploadService} from "../../service/file-upload.service";
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-file-upload-form',
@@ -26,12 +26,7 @@ export class FileUploadFormComponent implements OnInit {
 
   onSubmit(value: any) {
     this.fileUploadService.postFile(this.fileToUpload, this.selectedType).subscribe(result => {
-      // this.fileUploadService.postFile(this.fileToUpload,this.customDivider,String(this.withHeaders),this.selectedDeviceType).subscribe(result => {
 
-
-      // console.warn('sent data', value);
-      // console.warn('received result', result);
-      // do something, if upload success
       this.uploadForm.reset();
       // this.gotoFilesList()
 
@@ -47,18 +42,15 @@ export class FileUploadFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.deviceTypes = ['network', 'special'];
-    this.uploadForm = new FormGroup({
-      selectedType: new FormControl(this.deviceTypes[0], [Validators.required]),
-      file: new FormControl(null, [Validators.required])
+    this.uploadForm = this.formBuilder.group({
+      selectedType: this.formBuilder.control(this.deviceTypes[0], [Validators.required]),
+      file: this.formBuilder.control(null, [Validators.required])
     });
-    this.uploadForm.valueChanges.subscribe(value => console.log(value));
     this.uploadForm.get('selectedType').valueChanges.subscribe(value => {
       this.selectedType = value;
-      console.log(value)
     });
     this.uploadForm.get('file').valueChanges.subscribe(value => {
       this.fileToUpload = value;
-      console.log(value);
     });
   }
 
