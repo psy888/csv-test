@@ -10,11 +10,11 @@ export class CsvfileServiceService {
   private baseUrl: string;
 
   constructor(private http: HttpClient) {
-    this.baseUrl = 'http://localhost:8080';
+    this.baseUrl = 'http://localhost:8080/search';
   }
 
   public findByNameContainsPaged(searchRequest: string, page: number, sortByField: string, sortOrder: string) {
-    return this.http.get<Csvfile>(this.baseUrl + '/search', {
+    return this.http.get<Csvfile>(this.baseUrl, {
       params: {
         search: searchRequest,
         page: page.toString(),
@@ -23,7 +23,6 @@ export class CsvfileServiceService {
       }
     });
   }
-
 
 
 }
