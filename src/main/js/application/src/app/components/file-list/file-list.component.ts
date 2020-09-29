@@ -17,13 +17,16 @@ export class FileListComponent implements OnInit {
   searchRequest: string = '';
   currentPage: number = 0;
   totalElements: number = 0;
-  totalPages: number = 0;
+  totalPages: number;
+  totalPagesArr: number[] = [];
   pageElementLimit: number = 0;
   sortByField: string = '';
   isAscending: boolean = true;
 
 
-  constructor(private csvFileService: CsvfileServiceService, private route: ActivatedRoute, private router: Router) {
+  constructor(private csvFileService: CsvfileServiceService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
 
@@ -70,6 +73,10 @@ export class FileListComponent implements OnInit {
         this.totalElements = data['totalElements'];
         this.totalPages = data['totalPages'];
         this.pageElementLimit = data['size'];
+        console.log(this.totalElements);
+        console.log(this.pageElementLimit);
+        console.log('totalPages' + this.totalPages);
+        this.fillPageIndexArr(this.totalPages);
       },
       error => {
         console.log(error.error.message);
@@ -90,4 +97,28 @@ export class FileListComponent implements OnInit {
   }
 
 
+  public getPage(pageNum: number) {
+    this.currentPage = pageNum;
+    this.search()
+  }
+
+  public getNextPage(): void {
+    if (this.currentPage < this.totalPages - 1) {
+      this.currentPage++;
+      this.search();
+    }
+  }
+
+  public getPreviousPage(): void {
+    if (this.currentPage > 0) {
+      this.currentPage--;
+      this.search();
+    }
+  }
+
+  public fillPageIndexArr(totalPages: any) {
+    console.log(totalPages);
+    // this.fillPageIndexArr([]);
+    this.totalPagesArr = new Array(totalPages).fill(0);
+  }
 }

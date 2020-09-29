@@ -1,3 +1,11 @@
 .header-cell:hover {
   color: lightblue;
 }
+
+.disabled {
+  color: dimgray;
+}
+
+.disabled:hover {
+  color: dimgray;
+}
