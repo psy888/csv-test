@@ -10,7 +10,6 @@ import {CsvfileServiceService} from "./service/csvfile-service.service";
 import {FileUploadService} from "./service/file-upload.service";
 import {HttpClientModule} from "@angular/common/http";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {NgxPaginationModule} from "ngx-pagination";
 import {NetDeviceListComponent} from './components/net-device-list/net-device-list.component';
 import {SpecDeviceListComponent} from './components/spec-device-list/spec-device-list.component';
 
@@ -29,8 +28,7 @@ import {SpecDeviceListComponent} from './components/spec-device-list/spec-device
     FormsModule,
     ModalModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
-    NgxPaginationModule,
+    BrowserAnimationsModule
   ],
   providers: [CsvfileServiceService, FileUploadService],
   bootstrap: [AppComponent]
