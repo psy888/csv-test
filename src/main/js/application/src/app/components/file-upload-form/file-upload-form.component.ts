@@ -28,7 +28,7 @@ export class FileUploadFormComponent implements OnInit {
     this.fileUploadService.postFile(this.fileToUpload, this.selectedType).subscribe(result => {
 
       this.uploadForm.reset();
-      // this.gotoFilesList()
+      this.gotoFilesList()
 
     }, error => {
       //todo handle errors and sho message to user
@@ -54,4 +54,7 @@ export class FileUploadFormComponent implements OnInit {
     });
   }
 
+  private gotoFilesList() {
+    this.router.navigate(['files']);
+  }
 }
