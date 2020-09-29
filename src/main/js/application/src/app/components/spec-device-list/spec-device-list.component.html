@@ -85,8 +85,8 @@
             *ngIf="editForm.get('productionDate').invalid && (editForm.get('productionDate').dirty || editForm.get('productionDate').touched)"
             class="alert alert-danger">
 
-            <div *ngIf="editForm.get('productionDate').errors.max">
-              Макс значение 100.00
+            <div *ngIf="editForm.get('productionDate').errors.futureDate">
+              Дата не должна быть позже сегодня
             </div>
           </div>
         </div>

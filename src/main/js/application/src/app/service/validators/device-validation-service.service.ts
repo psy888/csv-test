@@ -28,7 +28,11 @@ export class DeviceValidationServiceService {
   }
 
   dateValidation(control: FormControl): { [s: string]: boolean } {
-    let date = control.value;
+    let date = Date.parse(control.value);
+    if (date > Date.now()) {
+      return {"futureDate": true};
+    }
+    // console.log(date);
     return null;
   }
 }
